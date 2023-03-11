@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .loginForm-Container {
+            margin: auto;
+            width: 400px;
+            height: 600px;
+            background-color: white;
+            padding: 30px 10px 24px;
+            border-radius: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+
+        label {
+            display: block;
+            padding: 3px 10px 3px;
+            font-size: 16px;
+        }
+
+        input {
+            border: solid gainsboro 2px;
+            border-radius: 18px;
+            width: 236px;
+            height: 32px;
+            padding: 8px 16px;
+            font-size: 16px;
+        }
+
+        .feildError {
+            color: red;
+            font-size: 12px;
+            margin: 0px;
+            padding: 5px 10px 0px 10px;
+        }
+
+        form {
+            text-align: left;
+            margin: auto;
+            width: 272px;
+        }
+
+        .form_box {
+            margin-bottom: 15px;
+        }
+
+        #login-description {
+            font-size: 16px;
+            width: 268px;
+            text-align: center;
+            margin: auto;
+            margin-bottom: 20px;
+            font-weight: lighter;
+        }
+
+        #login-description > div {
+            margin-bottom: 3px;
+        }
+        
+        button {
+            margin: 20px 0px 0px;
+            padding: 0px 18px;
+            width: 268px;
+            height: 48px;
+            border-radius: 30px;
+            border: none;
+            background-color: #539c68;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="loginForm-Container">
+    <h1>환영합니다!</h1>
+    <div id="login-description">
+        <div>회원가입을 통해</div>
+        <div>다양한 모임을 즐겨보세요!</div>
+    </div>
+    <form th:action="@{/members/new}" th:object="${memberForm}" method="post">
+        <div class="form_box">
+            <label th:for="email">이메일</label>
+            <input type="text" th:field="*{email}" placeholder="이메일을 입력하세요">
+            <p th:if = "${#fields.hasErrors('email')}" th:errors="*{email}" class="feildError"></p>
+        </div>
+        <div class="form_box">
+            <label th:for="password">비밀번호</label>
+            <input type="password" th:field="*{password}" placeholder="비밀번호를 입력해주세요">
+            <p th:if = "${#fields.hasErrors('password')}" th:errors="*{password}" class="feildError"></p>
+        </div>
+        <div class="form_box">
+            <label th:for="passwordCon">비밀번호 확인</label>
+            <input type="password" th:field="*{passwordCon}" placeholder="비밀번호를 확인하세요">
+            <p th:if = "${#fields.hasErrors('passwordCon')}" th:errors="*{passwordCon}" class="feildError"></p>
+        </div>
+        <div class="form_box">
+            <label th:for="name">닉네임</label>
+            <input type="text" th:field="*{name}" placeholder="닉네임을 입력하세요">
+            <p th:if = "${#fields.hasErrors('name')}" th:errors="*{name}" class="feildError"></p>
+        </div>
+        <button type="submit">회원가입</button>
+</form>
+</div>
+</body>
+</html>

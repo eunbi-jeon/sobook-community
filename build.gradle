@@ -26,6 +26,14 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	//h2 database
+	runtimeOnly 'com.h2database:h2'
+
+	//modelmapper 라이브러리
+	implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.3.9'
+
+	//mysql드라이버 runtimeOnly 'com.mysql:mysql-connector-j'
 }
 
 tasks.named('test') {
