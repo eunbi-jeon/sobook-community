@@ -1,10 +1,105 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>소북소북</title>
+    <style>
+        .loginForm-Container {
+            margin: auto;
+            width: 400px;
+            height: 600px;
+            background-color: white;
+            padding: 30px 10px 24px;
+            border-radius: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+
+        label {
+            display: block;
+            padding: 3px 10px 3px;
+            font-size: 16px;
+        }
+
+        input {
+            border: solid gainsboro 2px;
+            border-radius: 18px;
+            width: 236px;
+            height: 32px;
+            padding: 8px 16px;
+            font-size: 16px;
+        }
+
+        .LoginError {
+            color: red;
+            font-size: 16px;
+            margin: 0px;
+            padding: 5px 10px 0px 10px;
+            text-align: center;
+        }
+
+        form {
+            text-align: left;
+            margin: auto;
+            width: 272px;
+        }
+
+        .form_box {
+            margin-bottom: 15px;
+        }
+
+        #login-description {
+            font-size: 16px;
+            width: 268px;
+            text-align: center;
+            margin: auto;
+            margin-bottom: 20px;
+            font-weight: lighter;
+        }
+
+        #login-description > div {
+            margin-bottom: 3px;
+        }
+        
+        button {
+            margin: 10px 0px 0px;
+            padding: 0px 18px;
+            width: 268px;
+            height: 48px;
+            border-radius: 30px;
+            border: none;
+            background-color: #539c68;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-
+    <div class="loginForm-Container">
+    <h1>환영합니다!</h1>
+    <div id="login-description">
+        <div>로그인을 통해</div>
+        <div>다양한 모임을 즐겨보세요!</div>
+    </div>
+    <form th:action="@{/members/login}" method="post">
+        <div class="form_box">
+            <label th:for="email">이메일</label>
+            <input type="text" name="email" placeholder="이메일을 입력하세요">
+        </div>
+        <div class="form_box">
+            <label th:for="password">비밀번호</label>
+            <input type="password" name="password" placeholder="비밀번호를 입력하세요">
+        </div>
+        <p th:if="${loginErrorMsg}" class="LoginError" th:text="${loginErrorMsg}"></p>
+        <button type="submit">로그인</button>
+        <div style="margin-top: 30px; margin-bottom:10px; font-size: 16px; text-align: center;">아직 계정이 없으신가요?</div>
+        <button th:onclick="|location.href='@{/members/new}'|" style="margin-top: 0px;" type="reset">회원가입</button>
+    </form>
+</div>
 </body>
 </html>

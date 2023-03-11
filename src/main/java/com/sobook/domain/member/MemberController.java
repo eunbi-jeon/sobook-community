@@ -1,15 +1,13 @@
-package com.sobook.member;
+package com.sobook.domain.member;
 
 import com.sobook.web.validator.MemberFormValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.print.attribute.standard.PresentationDirection;
 import javax.validation.Valid;
 
 @RequestMapping("/members")
@@ -37,14 +35,19 @@ public class MemberController {
             return "member/memberForm";
         }
 
-        log.info("memberForm {}", memberForm.getEmail());
-
-        Member member = Member.createMember(memberForm);
-
-        log.info("member = {}", member.getEmail());
-
-        memberService.saveMember(member);
+        memberService.saveMember(memberForm);
 
         return "redirect:/";
+    }
+
+    @GetMapping("/login")
+    public String loginMember() {
+        return "member/memberLoginForm";
+    }
+
+    @GetMapping("/login/error")
+    public String loginError(Model model) {
+        model.addAttribute("loginErrorMsg", "아이디 또는 비밀번호를 확인해주세요");
+        return "member/memberLoginForm";
     }
 }

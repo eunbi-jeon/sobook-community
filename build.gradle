@@ -27,6 +27,13 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+	//타임리프 레이아웃
+	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+
+	//Spring security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+
 	//h2 database
 	runtimeOnly 'com.h2database:h2'
 

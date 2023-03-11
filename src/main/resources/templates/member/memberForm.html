@@ -2,7 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>소북소북</title>
     <style>
         .loginForm-Container {
             margin: auto;
@@ -34,7 +34,7 @@
             font-size: 16px;
         }
 
-        .feildError {
+        .fieldError {
             color: red;
             font-size: 12px;
             margin: 0px;
@@ -89,22 +89,22 @@
         <div class="form_box">
             <label th:for="email">이메일</label>
             <input type="text" th:field="*{email}" placeholder="이메일을 입력하세요">
-            <p th:if = "${#fields.hasErrors('email')}" th:errors="*{email}" class="feildError"></p>
+            <p th:if = "${#fields.hasErrors('email')}" th:errors="*{email}" class="fieldError"></p>
         </div>
         <div class="form_box">
             <label th:for="password">비밀번호</label>
-            <input type="password" th:field="*{password}" placeholder="비밀번호를 입력해주세요">
-            <p th:if = "${#fields.hasErrors('password')}" th:errors="*{password}" class="feildError"></p>
+            <input type="password" th:field="*{password}" placeholder="비밀번호를 입력하세요">
+            <p th:if = "${#fields.hasErrors('password')}" th:errors="*{password}" class="fieldError"></p>
         </div>
         <div class="form_box">
             <label th:for="passwordCon">비밀번호 확인</label>
             <input type="password" th:field="*{passwordCon}" placeholder="비밀번호를 확인하세요">
-            <p th:if = "${#fields.hasErrors('passwordCon')}" th:errors="*{passwordCon}" class="feildError"></p>
+            <p th:if = "${#fields.hasErrors('passwordCon')}" th:errors="*{passwordCon}" class="fieldError"></p>
         </div>
         <div class="form_box">
             <label th:for="name">닉네임</label>
             <input type="text" th:field="*{name}" placeholder="닉네임을 입력하세요">
-            <p th:if = "${#fields.hasErrors('name')}" th:errors="*{name}" class="feildError"></p>
+            <p th:if = "${#fields.hasErrors('name')}" th:errors="*{name}" class="fieldError"></p>
         </div>
         <button type="submit">회원가입</button>
 </form>

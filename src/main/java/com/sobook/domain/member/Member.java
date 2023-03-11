@@ -1,8 +1,10 @@
-package com.sobook.member;
+package com.sobook.domain.member;
 
+import com.sobook.domain.constant.Role;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -10,6 +12,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
+@ToString
 public class Member {
 
     @Id
@@ -24,11 +27,7 @@ public class Member {
     private String name;
     private String password;
 
-    public static Member createMember(MemberForm memberForm){
-        Member member = new Member();
-        member.setEmail(memberForm.getEmail());
-        member.setName(memberForm.getName());
-        member.setPassword(memberForm.getPassword());
-        return member;
-    }
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
 }

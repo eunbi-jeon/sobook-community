@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,7 +15,9 @@
             <input type="text" name="keyword" value="" placeholder="검색어를 입력해주세요">
         </div>
         <div class="icon">
-            <div id="login">로그인</div>
+            <a sec:authorize="!isAuthenticated()" th:href="@{/members/login}" ><button class="btn-login">로그인</button></a>
+            <form th:action="@{/members/logout}" method="POST" sec:authorize="isAuthenticated()">
+                <button class="btn-login" type="submit">로그아웃</button>
         </div>
     </div>
 </header>

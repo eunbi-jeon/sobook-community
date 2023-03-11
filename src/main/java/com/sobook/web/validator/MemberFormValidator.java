@@ -1,7 +1,7 @@
 package com.sobook.web.validator;
 
-import com.sobook.member.MemberForm;
-import com.sobook.member.MemberRepository;
+import com.sobook.domain.member.MemberForm;
+import com.sobook.domain.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -39,7 +39,5 @@ public class MemberFormValidator implements Validator {
             errors.rejectValue("passwordCon", "invalid.passwordCon",
                     new Object[]{memberForm.getPasswordCon()}, "비밀번호와 일치하지 않습니다. 다시 확인해주세요.");
         }
-
-
     }
 }

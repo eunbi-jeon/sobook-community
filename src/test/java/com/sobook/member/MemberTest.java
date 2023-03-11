@@ -1,19 +1,28 @@
 package com.sobook.member;
 
-import org.assertj.core.api.Assertions;
+import com.sobook.domain.member.Member;
+import com.sobook.domain.member.MemberRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.Optional;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 public class MemberTest {
 
     @Autowired
     private MemberRepository memberRepository;
+
+    @Test
+    public void configure() {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
+        String result = encoder.encode("12345");
+        System.out.println("result = " + result);
+        assertTrue(encoder.matches("12345", result));
+    }
     //회원 가입
     @Test
     public void save() {

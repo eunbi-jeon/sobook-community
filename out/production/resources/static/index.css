@@ -43,21 +43,16 @@ header {
     margin-top: 3px;
 }
 
-.icon {
-    height: 40px;
-    width: 65px;
-    background-color: #539C68;
-    border-radius: 30px;
-    display : flex;
-    align-items : center;
-    justify-content : center;
-    margin-top: 5px;
-}
-
-#login {
+.btn-login {
     color: white;
     font-size: 16px;
     font-weight: bold;
+    height: 40px;
+    width: 80px;
+    background-color: #539C68;
+    border-radius: 30px;
+    border: none;
+    margin-top: 5px;
 }
 
 main {
