@@ -1,7 +1,7 @@
 package com.sobook.web.validator;
 
 import com.sobook.domain.member.MemberForm;
-import com.sobook.domain.member.MemberRepository;
+import com.sobook.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;

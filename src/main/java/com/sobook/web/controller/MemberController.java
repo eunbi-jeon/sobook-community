@@ -1,5 +1,7 @@
-package com.sobook.domain.member;
+package com.sobook.web.controller;
 
+import com.sobook.domain.member.MemberForm;
+import com.sobook.service.MemberService;
 import com.sobook.web.validator.MemberFormValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +20,8 @@ public class MemberController {
 
     private final MemberService memberService;
     private final MemberFormValidator memberFormValidator;
+
+    /* 회원 가입 */
     @GetMapping("/new")
     public String memberForm(@ModelAttribute("memberForm") MemberForm memberForm) {
         return "member/memberForm";
@@ -40,6 +44,7 @@ public class MemberController {
         return "redirect:/";
     }
 
+    /* 회원 로그인 */
     @GetMapping("/login")
     public String loginMember() {
         return "member/memberLoginForm";
@@ -50,4 +55,5 @@ public class MemberController {
         model.addAttribute("loginErrorMsg", "아이디 또는 비밀번호를 확인해주세요");
         return "member/memberLoginForm";
     }
+
 }

@@ -1,7 +1,7 @@
 package com.sobook.member;
 
 import com.sobook.domain.member.Member;
-import com.sobook.domain.member.MemberRepository;
+import com.sobook.repository.MemberRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

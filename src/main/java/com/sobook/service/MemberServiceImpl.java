@@ -1,5 +1,7 @@
-package com.sobook.domain.member;
+package com.sobook.service;
 
+import com.sobook.domain.member.Member;
+import com.sobook.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -31,5 +33,6 @@ public class MemberServiceImpl implements UserDetailsService {
                 .roles(member.getRole().toString())
                 .build();
     }
+
 
 }

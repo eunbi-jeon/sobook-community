@@ -1,5 +1,6 @@
-package com.sobook.domain.member;
+package com.sobook.repository;
 
+import com.sobook.domain.member.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

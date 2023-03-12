@@ -1,6 +1,9 @@
-package com.sobook.domain.member;
+package com.sobook.service;
 
 import com.sobook.domain.constant.Role;
+import com.sobook.domain.member.Member;
+import com.sobook.domain.member.MemberForm;
+import com.sobook.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
