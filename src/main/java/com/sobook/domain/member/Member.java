@@ -2,7 +2,6 @@ package com.sobook.domain.member;
 
 import com.sobook.domain.constant.Role;
 import lombok.*;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
