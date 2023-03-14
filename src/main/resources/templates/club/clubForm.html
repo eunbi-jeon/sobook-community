@@ -159,7 +159,7 @@
                 </div>
             </div>
             <div class="club-form-right">
-                <form th:action="@{/new-club}" th:object="${clubForm}" method="post">
+                <form th:action="@{/club/new}" th:object="${clubForm}" method="post">
                     <div class="form-group">
                         <label for="path">모임 URL</label>
                         <input id="path" type="text" th:field="*{path}" class="form-control"

@@ -13,10 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URLEncoder;
@@ -26,6 +23,7 @@ import java.security.Principal;
 @Controller
 @RequiredArgsConstructor
 @Slf4j
+@RequestMapping("/club")
 public class ClubController {
 
     private final ClubService clubService;
@@ -38,14 +36,14 @@ public class ClubController {
         webDataBinder.addValidators(clubValidator);
     }
 
-    @GetMapping("/new-club")
+    @GetMapping("/new")
     public String newClubForm(Principal principal, Model model) {
         model.addAttribute(memberService.viewMember(principal.getName()));
         model.addAttribute(new ClubForm());
         return "club/clubForm";
     }
 
-    @PostMapping("/new-club")
+    @PostMapping("/new")
     public String newClub(Principal principal, @Valid ClubForm clubForm, BindingResult bindingResult) {
 
         Member member = memberService.viewMember(principal.getName());
@@ -55,15 +53,20 @@ public class ClubController {
         }
 
         Club club = clubService.createNewClub(modelMapper.map(clubForm, Club.class), member);
-        return "redirect:/" + URLEncoder.encode(club.getPath(), StandardCharsets.UTF_8);
+        return "redirect:/club/" + URLEncoder.encode(club.getPath(), StandardCharsets.UTF_8);
     }
 
     @GetMapping("/{path}")
     public String viewClub(Principal principal, @PathVariable String path, Model model) {
-        model.addAttribute(memberService.viewMember(principal.getName()));
+        model.addAttribute("member", memberService.viewMember(principal.getName()));
         model.addAttribute(clubService.getClub(path));
 
         return "club/detail";
+    }
+
+    @GetMapping("/list")
+    public String clublist() {
+        return "club/list";
     }
 
 

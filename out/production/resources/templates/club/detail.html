@@ -1,12 +1,54 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/index.css">
-    <title>소북소북</title>
-</head>
-<body>
-</body>
-</html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layout/layout}">
+
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
+    <style>
+        .container {
+            width: 1200px;
+            padding: 80px;
+            border: solid gainsboro 1px;
+        }
+    </style>
+</th:block>
+
+<th:block layout:fragment="Content">
+    <div style="height: 100%; top: 90px; position: relative;">
+            <div class="container">
+                <a href="#" th:href="@{'/club/' + ${club.path}}">
+                    <h2><span th:text="${club.title}">스터디 이름</span></h2>
+                </a>
+                <div>
+                <span th:if="${club.closed}" title="종료된 모임이에요">
+                    <button type="button" disabled>CLOSED</button>
+                </span>
+                    <span th:if="${!club.recruiting}" title="현재는 모집중이 아니에요">
+                    <button type="button" disabled>OFF</button>
+                </span>
+                    <span sec:authorize="isAuthenticated()"
+                          th:if="${club.isJoinable(member)}" class="btn-group" role="group" aria-label="Basic example">
+                    <a class="btn btn-primary" th:href="@{'/club/' + ${club.path} + '/join'}">
+                        스터디 가입
+                    </a>
+                    <a class="btn btn-outline-primary" th:href="@{'/club/' + ${club.path} + '/members'}" th:text="${club.members.size()}">1</a>
+                </span>
+                    <span sec:authorize="isAuthenticated()"
+                          th:if="${!club.closed && club.isMember(member)}" class="btn-group" role="group">
+                    <a class="btn btn-outline-warning" th:href="@{'/club/' + ${club.path} + '/leave'}">
+                        스터디 탈퇴
+                    </a>
+                    <a class="btn btn-outline-primary" th:href="@{'/club/' + ${club.path} + '/members'}" th:text="${club.members.size()}">1</a>
+                </span>
+                    <span sec:authorize="isAuthenticated()"
+                          th:if="${!club.closed && club.isManager(member)}">
+                    <a class="btn btn-outline-primary" th:href="@{'/club/' + ${club.path} + '/new-book'}">
+                        <i class="fa fa-plus"></i>책 등록하기
+                    </a>
+                </span>
+                </div>
+            </div>
+        </div>
+</th:block>

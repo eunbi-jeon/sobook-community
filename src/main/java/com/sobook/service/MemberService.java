@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 
+import java.time.LocalDateTime;
+
 @Service
 @Slf4j
 @Transactional
@@ -29,6 +31,7 @@ public class MemberService {
         member.setNickname(memberForm.getNickname());
         member.setPassword(passwordEncoder.encode(memberForm.getPassword()));
         member.setRole(Role.USER);
+        member.setJoinedAt(LocalDateTime.now());
 
         return memberRepository.save(member);
     }
