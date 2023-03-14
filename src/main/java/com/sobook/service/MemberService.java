@@ -24,11 +24,18 @@ public class MemberService {
 
         Member member = new Member();
         member.setEmail(memberForm.getEmail());
-        member.setName(memberForm.getName());
+        member.setNickname(memberForm.getNickname());
         member.setPassword(passwordEncoder.encode(memberForm.getPassword()));
         member.setRole(Role.USER);
 
         return memberRepository.save(member);
     }
+
+    //회원정보 조회
+    public Member viewMember(String email) {
+        return memberRepository.findByEmail(email);
+    }
+
+    //회원정보 수정
 
 }

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<!-- Thymeleaf 선언 / headerFragment 임을 선언-->
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      th:fragment="HeaderFragment">
+<header>
+        <div class="header-container">
+            <img src="/img/logo.png" alt="" id="logo">
+            <div class="search">
+                <input type="text" name="keyword" value="" placeholder="검색어를 입력해주세요">
+            </div>
+            <a style="margin-left: 5px" sec:authorize="isAuthenticated()" th:href="@{'/profile/' + ${#authentication.name}}" id="header-profile">
+                <img src="/img/profile-basic.png">
+            </a>
+            <div class="icon">
+                <a sec:authorize="!isAuthenticated()" th:href="@{/members/login}" ><button class="btn-login">로그인</button></a>
+                <form style="display: inline-block" th:action="@{/members/logout}" method="POST" sec:authorize="isAuthenticated()">
+                    <button class="btn-login" type="submit">로그아웃</button>
+                </form>
+            </div>
+        </div>
+    </header>
+</html>

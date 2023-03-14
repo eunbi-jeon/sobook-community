@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>회원정보</title>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
     <style>
         .container {
             background-color: white;
@@ -104,13 +104,15 @@
             margin: 3px;
         }
     </style>
-</head>
-<body>
+</th:block>
+
+<th:block layout:fragment="Content">
+    <div style="height: 100%;top: 90px;position: relative;">
     <div class="container">    
         <div id="profile-img">
             <img src="#" alt="">
         </div>
-        <div class="main-name">닉네임</div>
+        <div class="main-name" th:value="${member.nickname}" th:text="${member.nickname}">닉네임</div>
         <div class="member-detail-list">
             <div class="club-list">
                 <div class="title">내가 가입한 모임</div>
@@ -153,7 +155,7 @@
                         </div>
                     </div>
                     <a href="#">
-                        <img style="text-align: center;" src="../../static/img/add_FILL0_wght700_GRAD0_opsz48.png" alt="" class="puls-icon">
+                        <img style="text-align: center;" src="/img/add_FILL0_wght700_GRAD0_opsz48.png" alt="" class="puls-icon">
                     </a>
                 </div>
             </div>
@@ -198,16 +200,15 @@
                         </div>
                     </div>
                     <a href="#">
-                        <img style="text-align: center;" src="../../static/img/add_FILL0_wght700_GRAD0_opsz48.png" alt="" class="puls-icon">
+                        <img style="text-align: center;" src="/img/add_FILL0_wght700_GRAD0_opsz48.png" alt="" class="puls-icon">
                     </a>
                 </div>
             </div>
             </div>
         <div style="margin-top: 50px;">
-            <button id="member-update" class="member-menu" th:action="/members/update">정보수정</button>
+            <button id="member-update" class="member-menu" th:onclick="|location.href='@{/members/update}'|">정보수정</button>
             <button id="member-delete" class="member-menu">회원탈퇴</button>
         </div>
     </div>
-</div>
-</body>
-</html>
+    </div>
+</th:block>

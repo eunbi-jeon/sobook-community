@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>소북소북</title>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
     <style>
         .loginForm-Container {
             margin: auto;
             width: 400px;
-            height: 600px;
             background-color: white;
-            padding: 30px 10px 24px;
             border-radius: 30px;
+            padding: 60px 10px 24px;
         }
 
         h1 {
@@ -78,8 +79,9 @@
             font-weight: bold;
         }
     </style>
-</head>
-<body>
+</th:block>
+<th:block layout:fragment="Content">
+    <div style="height: 100%; top: 90px; position: relative;">
     <div class="loginForm-Container">
     <h1>환영합니다!</h1>
     <div id="login-description">
@@ -100,6 +102,6 @@
         <div style="margin-top: 30px; margin-bottom:10px; font-size: 16px; text-align: center;">아직 계정이 없으신가요?</div>
         <button th:onclick="|location.href='@{/members/new}'|" style="margin-top: 0px;" type="reset">회원가입</button>
     </form>
-</div>
-</body>
-</html>
+    </div>
+    </div>
+</th:block>

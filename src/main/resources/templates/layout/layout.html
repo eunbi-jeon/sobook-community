@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<!--라이브러리 참조 : Thymeleaf & Thymeleaf Layout -->
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+  <meta charset="UTF-8">
+  <title>소북소북</title>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <link th:href="@{/header.css}" rel="stylesheet">
+  <link th:href="@{/footer.css}" rel="stylesheet">
+
+  <th:block layout:fragment="script"></th:block>
+  <th:block layout:fragment="css"></th:block>
+
+<body>
+<!--Header 영역을 참조합니다.-->
+<header th:replace="common/fragments/header :: HeaderFragment"></header>
+
+<!--Content 내용 영역을 참조합니다-->
+<th:block layout:fragment="Content">
+
+</th:block>
+
+<!--Footer 영역을 참조합니다.-->
+<footer th:replace="common/fragments/footer :: FooterFragment"></footer>
+</body>
+</html>

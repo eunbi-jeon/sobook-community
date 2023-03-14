@@ -29,9 +29,9 @@ public class MemberFormValidator implements Validator {
         }
 
         //닉네임 중복확인
-        if(memberRepository.existsByName(memberForm.getName())){
+        if(memberRepository.existsByNickname(memberForm.getNickname())){
             errors.rejectValue("name", "invalid.name",
-                    new Object[]{memberForm.getName()}, "이미 사용중인 닉네임 입니다.");
+                    new Object[]{memberForm.getNickname()}, "이미 사용중인 닉네임 입니다.");
         }
 
         //비밀번호 중복확인

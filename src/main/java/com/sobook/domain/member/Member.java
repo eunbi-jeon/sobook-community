@@ -1,9 +1,7 @@
 package com.sobook.domain.member;
 
 import com.sobook.domain.constant.Role;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
@@ -12,7 +10,10 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-@ToString
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@EqualsAndHashCode(of = "id") //컴파일 시점 자동으로 equal과 hashcode 메소드를 오버라이딩
 public class Member {
 
     @Id
@@ -24,8 +25,13 @@ public class Member {
     private String email;
 
     @Column(unique = true)
-    private String name;
+    private String nickname;
     private String password;
+
+    private LocalDateTime joinedAt;
+
+    @Lob @Basic(fetch = FetchType.EAGER)
+    private String profileImage;
 
     @Enumerated(EnumType.STRING)
     private Role role;

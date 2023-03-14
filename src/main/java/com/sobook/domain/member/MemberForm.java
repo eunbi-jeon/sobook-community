@@ -24,5 +24,5 @@ public class MemberForm {
     private String passwordCon;
 
     @NotBlank(message = "닉네임을 입력해주세요.")
-    private String name;
+    private String nickname;
 }

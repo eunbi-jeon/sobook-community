@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>회원정보</title>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
     <style>
         .container {
             background-color: white;
@@ -83,28 +83,27 @@
             margin-bottom: 15px;
         }
     </style>
-</head>
-<body>
-    <div class="container">    
+</th:block>
+<th:block layout:fragment="Content">
+    <div style="height: 100%;top: 90px;position: relative;">
+    <div class="container">
         <div id="profile-img">
             <a href="#"><img src="../../static/img/profile-basic.png" alt=""></a>
         </div>
-        <form action="/members/update" method="get">
+        <form th:object="${memberForm}" >
             <input type="hidden" th:name="_csrf" th:value="${_csrf.token}"/>
-            <input type="hidden" th:id="userId" th:value="*{id}">
-            <input type="text" class="main-name" th:filed="*{name}">
             <div class="form_box">
                 <label th:for="email">이메일</label>
-                <input type="text" th:field="*{email}" readonly>
+                <input type="text" th:value="*{email}" readonly>
             </div>
             <div class="form_box">
                 <label th:for="password">비밀번호</label>
-                <input type="password" th:field="*{password}" placeholder="비밀번호를 입력하세요">
+                <input type="password" value="${principal.user.password}" placeholder="비밀번호를 입력하세요">
                 <p th:if = "${#fields.hasErrors('password')}" th:errors="*{password}" class="fieldError"></p>
             </div>
             <div class="form_box">
                 <label th:for="passwordCon">비밀번호 확인</label>
-                <input type="password" th:field="*{passwordCon}" placeholder="비밀번호를 확인하세요">
+                <input type="password" placeholder="비밀번호를 확인하세요">
                 <p th:if = "${#fields.hasErrors('passwordCon')}" th:errors="*{passwordCon}" class="fieldError"></p>
             </div>
         </form>
@@ -112,6 +111,5 @@
             <button id="member-update" class="member-menu">수정완료</button>
         </div>
     </div>
-</div>
-</body>
-</html>
+    </div>
+</th:block>
