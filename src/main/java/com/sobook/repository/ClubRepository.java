@@ -6,6 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Optional;
+
 @Transactional(readOnly = true)
 @Repository
 public interface ClubRepository extends JpaRepository<Club, Long> {
@@ -14,5 +17,7 @@ public interface ClubRepository extends JpaRepository<Club, Long> {
     @EntityGraph(value = "Club.withAll", type = EntityGraph.EntityGraphType.LOAD)
     Club findByPath(String path);
     boolean existsByPath(String path);
+
+
 
 }

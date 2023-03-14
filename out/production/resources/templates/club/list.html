@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
     <style>
         .container{
             width: 890px;
@@ -100,9 +101,9 @@
             line-height: 20px;
         }
     </style>
-    <title>소북소북</title>
-</head>
-<body>
+</th:block>
+<th:block layout:fragment="Content">
+    <div style="height: 100%; top: 90px; position: relative;">
     <div class="container">
         <div class="club">
             <div class="club-main">
@@ -127,5 +128,5 @@
             </div>
         </div>
     </div>
-</body>
-</html>
+    </div>
+</th:block>

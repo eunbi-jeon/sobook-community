@@ -107,7 +107,7 @@
 </th:block>
 
 <th:block layout:fragment="Content">
-    <div style="height: 100%;top: 90px;position: relative;">
+    <div style="height: 100%; top: 90px; position: relative;">
     <div class="container">    
         <div id="profile-img">
             <img src="#" alt="">
@@ -118,88 +118,33 @@
                 <div class="title">내가 가입한 모임</div>
                 <div>
                     <div class="list-container">
-                        <div class="list">
-                            <span class="club-name">모임 이름어우우우우졸려어어어어어ㅓㅇ이거만하고좀자야겠따아아ㅏ</span>
+                        <div class="list" th:if="${!joinClub.isEmpty()}" th:each="join : ${joinClub}">
+                        <span class="club-name" th:text="${join.title}">모임 이름어우우우우졸려어어어어어ㅓㅇ이거만하고좀자야겠따아아ㅏ</span>
                             <div style="margin: 0; padding: 0;">
                                 <span class="club-sub">주제</span>
                                 <span class="club-sub">주제</span>
                             </div>
                         </div>
-                        <div class="list">
-                            <span class="club-name">모임 이름어우우우우졸려어어어어어ㅓㅇ이거만하고좀자야겠따아아ㅏ</span>
-                            <div style="margin: 0; padding: 0;">
-                                <span class="club-sub">주제</span>
-                                <span class="club-sub">주제</span>
-                            </div>
-                        </div>
-                        <div class="list">
-                            <span class="club-name">모임 이름어우우우우졸려어어어어어ㅓㅇ이거만하고좀자야겠따아아ㅏ</span>
-                            <div style="margin: 0; padding: 0;">
-                                <span class="club-sub">주제</span>
-                                <span class="club-sub">주제</span>
-                            </div>
-                        </div>
-                        <div class="list">
-                            <span class="club-name">모임 이름어우우우우졸려어어어어어ㅓㅇ이거만하고좀자야겠따아아ㅏ</span>
-                            <div style="margin: 0; padding: 0;">
-                                <span class="club-sub">주제</span>
-                                <span class="club-sub">주제</span>
-                            </div>
-                        </div>
-                        <div class="list">
-                            <span class="club-name">모임 이름어우우우우졸려어어어어어ㅓㅇ이거만하고좀자야겠따아아ㅏ</span>
-                            <div style="margin: 0; padding: 0;">
-                                <span class="club-sub">주제</span>
-                                <span class="club-sub">주제</span>
-                            </div>
-                        </div>
+
                     </div>
-                    <a href="#">
+                    <a th:href="@{/club/list}">
                         <img style="text-align: center;" src="/img/add_FILL0_wght700_GRAD0_opsz48.png" alt="" class="puls-icon">
                     </a>
                 </div>
             </div>
             <div class="club-list">
-                <div class="title">내가 개설한 모임</div>
+                <div class="title">내가 관리하는 모임</div>
                 <div>
                     <div class="list-container">
-                        <div class="list">
-                            <span class="club-name">모임 이름어우우우우졸려어어어어어ㅓㅇ이거만하고좀자야겠따아아ㅏ</span>
-                            <div style="margin: 0; padding: 0;">
-                                <span class="club-sub">주제</span>
-                                <span class="club-sub">주제</span>
-                            </div>
-                        </div>
-                        <div class="list">
-                            <span class="club-name">모임 이름어우우우우졸려어어어어어ㅓㅇ이거만하고좀자야겠따아아ㅏ</span>
-                            <div style="margin: 0; padding: 0;">
-                                <span class="club-sub">주제</span>
-                                <span class="club-sub">주제</span>
-                            </div>
-                        </div>
-                        <div class="list">
-                            <span class="club-name">모임 이름어우우우우졸려어어어어어ㅓㅇ이거만하고좀자야겠따아아ㅏ</span>
-                            <div style="margin: 0; padding: 0;">
-                                <span class="club-sub">주제</span>
-                                <span class="club-sub">주제</span>
-                            </div>
-                        </div>
-                        <div class="list">
-                            <span class="club-name">모임 이름어우우우우졸려어어어어어ㅓㅇ이거만하고좀자야겠따아아ㅏ</span>
-                            <div style="margin: 0; padding: 0;">
-                                <span class="club-sub">주제</span>
-                                <span class="club-sub">주제</span>
-                            </div>
-                        </div>
-                        <div class="list">
-                            <span class="club-name">모임 이름어우우우우졸려어어어어어ㅓㅇ이거만하고좀자야겠따아아ㅏ</span>
+                        <div class="list" th:if="${!createClub.isEmpty()}" th:each="create : ${createClub}">
+                            <span th:text="${create.title}" class="club-name">모임 이름어우우우우졸려어어어어어ㅓㅇ이거만하고좀자야겠따아아ㅏ</span>
                             <div style="margin: 0; padding: 0;">
                                 <span class="club-sub">주제</span>
                                 <span class="club-sub">주제</span>
                             </div>
                         </div>
                     </div>
-                    <a href="#">
+                    <a th:href="@{/club/new}">
                         <img style="text-align: center;" src="/img/add_FILL0_wght700_GRAD0_opsz48.png" alt="" class="puls-icon">
                     </a>
                 </div>

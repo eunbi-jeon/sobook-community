@@ -1,13 +1,14 @@
 package com.sobook.web.controller;
 
+import com.sobook.domain.club.Club;
 import com.sobook.domain.member.Member;
 import com.sobook.domain.member.MemberForm;
+import com.sobook.service.ClubService;
 import com.sobook.service.MemberService;
 import com.sobook.web.validator.MemberFormValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +16,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @RequestMapping("/members")
 @Controller
@@ -24,6 +29,7 @@ public class MemberController {
 
     private final MemberService memberService;
     private final MemberFormValidator memberFormValidator;
+    private final ClubService clubService;
 
     /* 회원 가입 */
     @GetMapping("/new")
@@ -69,7 +75,13 @@ public class MemberController {
         log.info("현재사용자 = {}", loginId);
         Member member = memberService.viewMember(loginId);
 
+
+        List<Club> joinClub = clubService.getJoinClub(member);
+        List<Club> createClub = clubService.getCreateClub(member);
+
         model.addAttribute("member", member);
+        model.addAttribute("joinClub", joinClub);
+        model.addAttribute("createClub", createClub);
         return "member/memberDetail";
     }
 

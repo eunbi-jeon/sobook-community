@@ -7,48 +7,85 @@
 <!-- 사용자 CSS 추가 -->
 <th:block layout:fragment="css">
     <style>
-        .container {
+     .container {
             width: 1200px;
             padding: 80px;
-            border: solid gainsboro 1px;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+        }
+
+        .icon-btn {
+            background-color: #539C68;
+            padding: 3px;
+            text-align: center;
+            border-radius: 3px;
+            font-size: 14px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .top {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            position: relative;
+            margin-bottom: 80px;
+        }
+
+        h2 {
+            font-size: 28pt;
+        }
+
+        p {
+            font-size: 16px;
+            height: 100px;
+        }
+
+        .main-left {
+            width: 300px;
         }
     </style>
 </th:block>
 
 <th:block layout:fragment="Content">
     <div style="height: 100%; top: 90px; position: relative;">
-            <div class="container">
-                <a href="#" th:href="@{'/club/' + ${club.path}}">
-                    <h2><span th:text="${club.title}">스터디 이름</span></h2>
-                </a>
-                <div>
+        <div class="container">
+            <div class="top">
+            <h2><span th:text="${club.title}">모임 이름</span></h2>
+            <div>
                 <span th:if="${club.closed}" title="종료된 모임이에요">
                     <button type="button" disabled>CLOSED</button>
                 </span>
-                    <span th:if="${!club.recruiting}" title="현재는 모집중이 아니에요">
+                <span th:if="${!club.recruiting}" title="현재는 모집중이 아니에요">
                     <button type="button" disabled>OFF</button>
                 </span>
-                    <span sec:authorize="isAuthenticated()"
-                          th:if="${club.isJoinable(member)}" class="btn-group" role="group" aria-label="Basic example">
-                    <a class="btn btn-primary" th:href="@{'/club/' + ${club.path} + '/join'}">
-                        스터디 가입
-                    </a>
-                    <a class="btn btn-outline-primary" th:href="@{'/club/' + ${club.path} + '/members'}" th:text="${club.members.size()}">1</a>
+                <span sec:authorize="isAuthenticated()"
+                      th:if="${club.isJoinable(member)}" class="btn-group" role="group" aria-label="Basic example">
+                    <a class="icon-btn" th:href="@{'/club/' + ${club.path} + '/join'}">
+                        스터디 가입</a>
                 </span>
-                    <span sec:authorize="isAuthenticated()"
-                          th:if="${!club.closed && club.isMember(member)}" class="btn-group" role="group">
-                    <a class="btn btn-outline-warning" th:href="@{'/club/' + ${club.path} + '/leave'}">
-                        스터디 탈퇴
-                    </a>
-                    <a class="btn btn-outline-primary" th:href="@{'/club/' + ${club.path} + '/members'}" th:text="${club.members.size()}">1</a>
+                <span sec:authorize="isAuthenticated()"
+                      th:if="${!club.closed && club.isMember(member)}" class="btn-group" role="group">
+                <a class="icon-btn" th:href="@{'/club/' + ${club.path} + '/leave'}">
+                    스터디 탈퇴</a>
                 </span>
-                    <span sec:authorize="isAuthenticated()"
-                          th:if="${!club.closed && club.isManager(member)}">
-                    <a class="btn btn-outline-primary" th:href="@{'/club/' + ${club.path} + '/new-book'}">
-                        <i class="fa fa-plus"></i>책 등록하기
-                    </a>
+                <span sec:authorize="isAuthenticated()"
+                      th:if="${!club.closed && club.isManager(member)}">
+                    <a class="icon-btn" th:href="@{'/club/' + ${club.path} + '/new-book'}">
+                        책 등록하기</a>
                 </span>
+            </div>
+            </div>
+            <div class="main">
+                <div class="main-left">
+                    <p th:text="${club.shortDescription}">모임 설명</p>
+                </div>
+                <div class="club-info">
+                    <span>모임 인원</span>
+                    <span th:text="${club.members.size()}+'명'" >1명</span>
                 </div>
             </div>
         </div>
+    </div>
 </th:block>

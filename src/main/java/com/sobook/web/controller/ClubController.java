@@ -9,6 +9,7 @@ import com.sobook.web.validator.ClubValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -64,10 +65,6 @@ public class ClubController {
         return "club/detail";
     }
 
-    @GetMapping("/list")
-    public String clublist() {
-        return "club/list";
-    }
 
 
 

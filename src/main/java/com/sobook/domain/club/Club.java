@@ -34,7 +34,7 @@ public class Club {
     private Set<Member> managers = new HashSet<>(); //매니저 여러명
 
     @ManyToMany
-    private Set<Member> members = new HashSet<>(); //매니저 여러명
+    private Set<Member> members = new HashSet<>(); //멤버 여러명
 
     private LocalDateTime createTime; //모임 등록일
     private LocalDateTime closeDateTime; //모임 모집 마감일
