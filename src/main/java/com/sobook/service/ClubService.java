@@ -6,7 +6,6 @@ import com.sobook.domain.constant.ClubMemberRole;
 import com.sobook.domain.member.Member;
 import com.sobook.repository.ClubMemberRepository;
 import com.sobook.repository.ClubRepository;
-import com.sobook.repository.ClubTag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -20,7 +19,6 @@ public class ClubService {
 
     private final ClubRepository clubRepository;
     private final ClubMemberRepository clubMemberRepository;
-    private final ClubTag clubTag;
 
     public Club createNewClub(Club club, Member member) {
         Club newClub = clubRepository.save(club);
@@ -29,6 +27,10 @@ public class ClubService {
         clubMemberRepository.save(clubMember);
 
         return newClub;
+    }
+
+    public Club getClub(String path) {
+        return clubRepository.findByPath(path);
     }
 
 

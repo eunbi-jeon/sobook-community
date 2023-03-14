@@ -6,8 +6,11 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Set;
 
+// EAGER FETCH 할 수 있도록
+@NamedEntityGraph(name = "Study.withAll", attributeNodes = {
+        @NamedAttributeNode("clubMember"),
+})
 @Entity
 @Getter @Setter @EqualsAndHashCode(of = "id")
 @Builder @NoArgsConstructor @AllArgsConstructor
@@ -23,6 +26,9 @@ public class Club {
 
     @Lob @Basic(fetch = FetchType.EAGER) @Type(type = "org.hibernate.type.TextType")
     private String images;
+
+//    @ManyToMany
+//    private Set<Tag> tags = new HashSet<>();
 
     private LocalDateTime createTime; //모임 등록일
     private LocalDateTime closeDateTime; //모임 모집 마감일

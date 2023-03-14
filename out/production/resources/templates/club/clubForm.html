@@ -1,14 +1,203 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
+    <style>
+        .container {
+            padding: 80px 0px;
+            height: 100%;
+            top: 90px;
+            position: relative;
+        }
+
+        .club-form-left {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .img {
+            width: 580px;
+            height: 270px;
+            background-color: gainsboro;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .club-form-right {
+            margin-left: 50px;
+            flex-wrap: wrap;
+            display: flex;
+            flex-direction: column;
+
+        }
+
+        .club-form-right input, textarea {
+            width: 310px;
+            height: 30px;
+            border-radius: 3px;
+            border: solid gainsboro 3px;
+            padding: 5px;
+            margin: 5px 0px 5px;
+        }
+
+        small {
+            font-size: 10px;
+            margin-bottom: 2px;
+            display: inline-block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        button, .button, .file-upload-button {
+            padding: 8px;
+            background-color: #539C68;
+            border-radius: 5px;
+            font-size: 14px;
+            color: white;
+            border: none;
+        }
+
+        #file {
+        display: none;
+        }   
+
+        .clubform {
+            width: 1000px;
+            box-shadow: 0px 0px 5px 0px gainsboro;
+            padding: 60px;
+            border-radius: 30px;
+            margin: auto;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .fieldError {
+            color: red;
+            font-size: 10px;
+            margin: 0px;
+            padding: 5px 10px 0px 10px;
+        }
+
+    </style>
+</th:block>
+<!-- 태그 추가 스크립트
+<th:block layout:fragment="script">
+    <script type="application/javascript" th:inline="javascript">
+        $(function() {
+            function tagRequest(url, tagTitle) {
+                $.ajax({
+                    dataType: "json",
+                    autocomplete: {
+                        enabled: true,
+                        rightKey: true,
+                    },
+                    contentType: "application/json; charset=utf-8",
+                    method: "POST",
+                    url: "[(${baseUrl})]" + url,
+                    data: JSON.stringify({'tagTitle': tagTitle})
+                }).done(function (data, status) {
+                    console.log("${data} and status is ${status}");
+                });
+            }
+
+            function onAdd(e) {
+                tagRequest("/add", e.detail.data.value);
+            }
+
+            function onRemove(e) {
+                tagRequest("/remove", e.detail.data.value);
+            }
+
+            let tagInput = document.querySelector("#tags");
+            let tagify = new Tagify(tagInput, {
+                pattern: /^.{0,20}$/,
+                whitelist: JSON.parse(document.querySelector("#whitelist").textContent),
+                dropdown : {
+                    enabled: 1, // suggest tags after a single character input
+                } // map tags
+            });
+            tagify.on("add", onAdd);
+            tagify.on("remove", onRemove);
+            // add a class to Tagify's input element
+            tagify.DOM.input.classList.add('form-control');
+            // re-place Tagify's input element outside of the  element (tagify.DOM.scope), just before it
+            tagify.DOM.scope.parentNode.insertBefore(tagify.DOM.input, tagify.DOM.scope);
+        });
+    </script>
+</th:block>
+-->
+<th:block layout:fragment="Content">
     <div class="container">
-        <div></div>
+        <div class="clubform">
+            <div class="club-form-left">
+            <div>
+                <div class="img">
+                    <img src="#" alt="">
+                </div>
+                <form style="width:580px; display: flex; justify-content: space-between; margin-bottom: 30px;" name = "img" action="#" method="post" enctype="multipart/form-data">
+                <label for="file"><div class="file-upload-button">파일 업로드</div></label>
+                    <input type="file" name="club-banner" id="file">
+                    <input type="submit" form="img" class="button">
+                </form>
+                <!-- 태그 추가 폼
+                <div class="form-group">
+                    <div style="font-size: 12px;" class="alert alert-info" role="alert">
+                        모임의 주제를 입력해보세요. 태그를 입력하고 콤마(,) 또는 엔터를 입력하세요.
+                    </div>
+                    <div id="whitelist" th:text="${whitelist}" hidden></div>
+                    <input style="margin-top: 8px; background-color: rgb(239, 239, 239); border: none; height: 30px; border-radius: 5px;" type="text" id="tags" name="tags" th:value="${#strings.listJoin(tags, ',')}"
+                           class="tagify-outside" aria-describedby="tagHelp">
+                </div>
+                -->
+                </div>
+            </div>
+            <div class="club-form-right">
+                <form th:action="@{/new-club}" th:object="${clubForm}" method="post">
+                    <div class="form-group">
+                        <label for="path">모임 URL</label>
+                        <input id="path" type="text" th:field="*{path}" class="form-control"
+                            placeholder="예) study-path" aria-describedby="pathHelp" required min="2" max="20"> 
+                        <small id="pathHelp" class="form-text text-muted">
+                        공백없이 문자, 숫자, 대시(-)와 언더바(_)만 2자 이상 20자 이내로 입력하세요.
+                        </small>
+                        <small class="form-text text-danger" th:if="${#fields.hasErrors('path')}" th:errors="*{path}">Path Error</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="title">모임 이름</label>
+                        <input id="title" type="text" th:field="*{title}" class="form-control"
+                               placeholder="예) 알베르 카뮈 읽기" aria-describedby="titleHelp" required max="50">
+                        <small id="titleHelp" class="form-text text-muted">
+                          모임 이름을 50자 이내로 입력하세요.
+                        </small>
+                        <small class="form-text text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title Error</small>
+                      </div>
+                
+                      <div class="form-group">
+                        <label for="shortDescription">소개</label>
+                        <textarea style = "height: 100px;" id="shortDescription" type="textarea" th:field="*{shortDescription}" class="form-control"
+                               placeholder="모임에 대해 짧게 소개해주세요." aria-describedby="shortDescriptionHelp" required></textarea>
+                        <small id="shortDescriptionHelp" class="form-text text-muted" maxlength="100">
+                            소개글을 입력하세요.(100자 이내)
+                        </small>
+                        <small class="form-text text-danger" th:if="${#fields.hasErrors('shortDescription')}" th:errors="*{shortDescription}">ShortDescription Error</small>
+                      </div>
+
+                      <div class="form-group">
+                        <button class="btn btn-primary btn-block" type="submit" aria-describedby="submitHelp">
+                          스터디 만들기
+                        </button>
+                      </div>
+                </form>
+            </div>
+        </div>
+        </div>
     </div>
-</body>
-</html>
+</th:block>

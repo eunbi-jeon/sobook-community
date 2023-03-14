@@ -13,7 +13,7 @@ import javax.validation.constraints.Pattern;
 public class ClubForm {
 
     @NotBlank
-    @Length(min = 20, max = 20)
+    @Length(min = 0, max = 20)
     private String path;
 
     @NotBlank
