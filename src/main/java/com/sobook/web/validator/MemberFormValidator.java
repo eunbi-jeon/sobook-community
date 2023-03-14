@@ -30,7 +30,7 @@ public class MemberFormValidator implements Validator {
 
         //닉네임 중복확인
         if(memberRepository.existsByNickname(memberForm.getNickname())){
-            errors.rejectValue("name", "invalid.name",
+            errors.rejectValue("nickname", "invalid.nickname",
                     new Object[]{memberForm.getNickname()}, "이미 사용중인 닉네임 입니다.");
         }
 
@@ -40,4 +40,6 @@ public class MemberFormValidator implements Validator {
                     new Object[]{memberForm.getPasswordCon()}, "비밀번호와 일치하지 않습니다. 다시 확인해주세요.");
         }
     }
+
+
 }

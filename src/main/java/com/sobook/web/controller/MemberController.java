@@ -62,10 +62,8 @@ public class MemberController {
 
     /* 회원 정보 페이지 */
     @PreAuthorize("isAuthenticated()") //로그인한 사용자만 정보를 조회할 수 있도록 함
-    @GetMapping("/profile/{nickname}")
-    public String memberProfile(@PathVariable String nickname,
-                                Model model,
-                                Principal principal) {
+    @GetMapping("/profile")
+    public String memberProfile(Model model, Principal principal) {
 
         String loginId = principal.getName();
         log.info("현재사용자 = {}", loginId);
@@ -77,10 +75,40 @@ public class MemberController {
 
     /* 회원 정보 수정 */
     @GetMapping("/update")
-    public String memberUpdate(@AuthenticationPrincipal MemberForm memberForm, Model model) {
-        log.info("사용자 = {}", memberForm.getEmail());
+    public String memberUpdate(@ModelAttribute MemberForm memberForm, Model model, Principal principal) {
+
+        String loginId = principal.getName();
+
+        Member member = memberService.viewMember(loginId);
+
+        memberForm.setNickname(member.getNickname());
+        memberForm.setEmail(member.getEmail());
+
         model.addAttribute("memberForm", memberForm);
         return "member/memberUpdateForm";
+    }
+
+    @PostMapping("/update")
+    public String updateMember(@Valid @ModelAttribute MemberForm memberForm,
+                            BindingResult bindingResult) {
+        //중복검사
+        log.info("검증시작");
+
+        memberService.updateValid(memberForm, bindingResult);
+
+        if(bindingResult.hasErrors()){
+            return "member/memberUpdateForm";
+        }
+
+        log.info("검증종료");
+
+        log.info("멤버 업데이트 시작");
+
+        memberService.updateMember(memberForm);
+
+        log.info("멤버 업데이트 종료");
+
+        return "redirect:/members/profile";
     }
 
 
